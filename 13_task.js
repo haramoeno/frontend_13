@@ -5,6 +5,7 @@ let cate1 = [
     '収納家具・収納グッズ',
     '子ども家具',
     '調理器具'
+    
 ];
 
 
@@ -24,38 +25,22 @@ let cate2 = [
 ];
 
 
-var itemList1 = [
-    { id: '0001', name: 'ソファベッド', tags: ['ベッド', 'ソファ', '寝具'] },
-    { id: '0002', name: 'シングルベッド', tags: ['ベッド', 'ソファ', '寝具'] },
-    { id: '0003', name: '子ども用ベッド', tags: ['ベッド', 'ソファ', '寝具', '子ども部屋家具'] },
-    { id: '0004', name: 'ソファ', tags: ['ソファ'] },
-    { id: '0005', name: 'キューブボックス', tags: ['家具・ラック', '収納システム'] },
-    { id: '0006', name: 'オープンラック', tags: ['家具・ラック', '収納システム'] },
-    { id: '0007', name: 'コンピュータデスク', tags: ['テーブル・椅子'] },
-    { id: '0008', name: 'サイドテーブル', tags: ['テーブル・椅子'] },
-    { id: '0009', name: 'ダイニングテーブル', tags: ['テーブル・椅子'] },
-    { id: '0010', name: '子ども部屋用収納', tags: ['収納システム', '子ども部屋家具'] },
-    { id: '0011', name: '鉄製フライパン', tags: ['フライパン'] },
-    { id: '0012', name: '圧力鍋', tags: ['鍋'] },
-    { id: '0013', name: 'ペティナイフ', tags: ['包丁']　},
-    
+var itemList = [
+    { id: '0001', name: 'ソファベッド', tags: ['ベッド', 'ソファ', '寝具'], price: 3000 },
+    { id: '0002', name: 'シングルベッド', tags: ['ベッド', 'ソファ', '寝具'], price: 5000 },
+    { id: '0003', name: '子ども用ベッド', tags: ['ベッド', 'ソファ', '寝具', '子ども部屋家具'], price: 6000 },
+    { id: '0004', name: 'ソファ', tags: ['ソファ'], price: 2000 },
+    { id: '0005', name: 'キューブボックス', tags: ['家具・ラック', '収納システム'], price: 2500 },
+    { id: '0006', name: 'オープンラック', tags: ['家具・ラック', '収納システム'], price: 3500 },
+    { id: '0007', name: 'コンピュータデスク', tags: ['テーブル・椅子'], price: 8000 },
+    { id: '0008', name: 'サイドテーブル', tags: ['テーブル・椅子'], price: 2000 },
+    { id: '0009', name: 'ダイニングテーブル', tags: ['テーブル・椅子'], price: 4000 },
+    { id: '0010', name: '子ども部屋用収納', tags: ['収納システム', '子ども部屋家具'], price: 5500 },
+    { id: '0011', name: '鉄製フライパン', tags: ['フライパン'], price:1500 },
+    { id: '0012', name: '圧力鍋', tags: ['鍋'], price: 4500 },
+    { id: '0013', name: 'ペティナイフ', tags: ['包丁'], price: 1000 },
 ];
 
-var itemList2 = {
-    price: 'ソファベッド',
-    price: 'シングルベッド',
-    price: '子ども用ベッド',
-    price: 'キューブボックス',
-    price: 'オープンラック',
-    price: 'コンピュータデスク',
-    price: 'サイドテーブル',
-    price: 'ダイニングテーブル',
-    price: '子ども部屋用収納',
-    price: '鉄製フライパン', 
-    price: '圧力鍋',
-    price: 'ペティナイフ',
-}
-;
 
 
 
@@ -71,13 +56,13 @@ function setMainMenu() {
     cate1Element.innerHTML = '';
 
     
-    for (let i = 0; i < cate1.length; i++) {
+    cate1.forEach(function(e){
         
         let option = document.createElement('option');
-        option.value = cate1[i];    
-        option.text = cate1[i];     
-        cate1Element.appendChild(option); 
-    }
+        option.value = e;    
+        option.text = e;     
+        cate1Element.appendChild(option);     
+    });
 }
 
 
@@ -86,29 +71,30 @@ function setSubMenu(idx) {
     cate2Element.innerHTML = '';
 
     
-    for (let i = 0; i < cate2[idx].length; i++) {
+    cate2[idx].forEach(function(e) {
         
         let option = document.createElement('option');
-        option.value = cate2[idx][i];    
-        option.text = cate2[idx][i];     
-        cate2Element.appendChild(option);      
-    }
+        option.value = e;
+        option.text = e;     
+        cate2Element.appendChild(option); 
+    });
 }
 
 
 function viewItemList(tag) {
     itemListElement.innerHTML = '';
-    for (let i = 0; i < itemList1.length; i++) {
-        if (itemList1[i].tags.some(t => t === tag)) {
+    
+    itemList.forEach(function(e) {
+        if (e.tags.some(t => t === tag)) {
             
             let li = document.createElement('li');
             
-            let text = document.createTextNode(itemList1[i].id + ':' + itemList1[i].name);
+            let text = document.createTextNode(e.id + ':' + e.name);
             
             li.appendChild(text);
             itemListElement.appendChild(li);
         }
-    }
+    });
 }
 
 
@@ -128,7 +114,6 @@ cate2Element.addEventListener('change', function () {
     viewItemList(val);
 
 });
-
 
 
 setMainMenu();
